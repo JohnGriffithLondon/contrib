@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/formio/premium#readme",
   "peerDependencies": {
-    "formiojs": "^4.9.20"
+    "formiojs": "^4.11.3"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
@@ -63,5 +63,8 @@
     "typescript": "^3.8.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "formiojs": "^4.11.3"
   }
 }
