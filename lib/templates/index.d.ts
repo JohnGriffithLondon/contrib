@@ -6,6 +6,9 @@ declare const _default: {
         qrcode: {
             form: string;
         };
+        radiomatrix: {
+            form: string;
+        };
     };
 };
 export default _default;

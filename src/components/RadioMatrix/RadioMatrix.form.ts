@@ -1,11 +1,11 @@
 import nestedComponentForm from 'formiojs/components/_classes/nested/NestedComponent.form';
-import QrCodeEditDisplay from './editForm/QrCode.edit.display';
+import RadioMatrixEditDisplay from './editForm/RadioMatrix.edit.display';
+import QrCodeEditDisplay from '../QrCode/editForm/QrCode.edit.display';
 export default function(...extend) {
-  //return QrCodeEditDisplay;
   return nestedComponentForm([
     {
       key: 'display',
-      components: [QrCodeEditDisplay]
+      components: QrCodeEditDisplay
     }
   ], ...extend);
 }

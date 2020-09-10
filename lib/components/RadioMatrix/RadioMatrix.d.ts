@@ -1,5 +1,5 @@
-import editForm from './QrCode.form';
-declare const QrCode_base: any;
+import editForm from './RadioMatrix.form';
+declare const RadioMatrix_base: any;
 /**
  * Here we will derive from the base component which all Form.io form components derive from.
  *
@@ -8,7 +8,7 @@ declare const QrCode_base: any;
  * @param data
  * @constructor
  */
-export default class QrCode extends QrCode_base {
+export default class RadioMatrix extends RadioMatrix_base {
     constructor(component: any, options: any, data: any);
     static schema(): any;
     static editForm: typeof editForm;
@@ -17,8 +17,11 @@ export default class QrCode extends QrCode_base {
         group: string;
         icon: string;
         weight: number;
+        documentation: string;
         schema: any;
     };
+    get tableClass(): string;
+    renderCell(row: any, col: any): any;
     render(children: any): any;
     /**
      * After the html string has been mounted into the dom, the dom element is returned here. Use refs to find specific
@@ -33,7 +36,7 @@ export default class QrCode extends QrCode_base {
      *
      * @returns {Array}
      */
-    getValue(): any;
+    getValue(): string;
     /**
      * Set the value of the component into the dom elements.
      *

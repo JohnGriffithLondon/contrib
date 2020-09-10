@@ -4,8 +4,8 @@
  * Get the base component class by referencing Formio.Components.components map.
  */
 import { Components } from 'formiojs';
-const baseComponent = (Components as any).components.field;
-import editForm from './QrCode.form';
+const FieldComponent = (Components as any).components.field;
+import editForm from './RadioMatrix.form';
 
 /**
  * Here we will derive from the base component which all Form.io form components derive from.
@@ -15,37 +15,53 @@ import editForm from './QrCode.form';
  * @param data
  * @constructor
  */
-export default class QrCode extends (baseComponent as any) {
+export default class RadioMatrix extends (FieldComponent as any) {
   constructor(component, options, data) {
     super(component, options, data);
-    // this.value = "";
   }
 
   static schema() {
-    var obj = baseComponent.schema({
-      type: 'qrcode',
-      numRows: 3,
-      numCols: 3,
-      defaultValue:""
-    });
-    return obj;
+    return FieldComponent.schema({
+      type: 'radiomatrix' });
   }
 
   public static editForm = editForm;
 
   static builderInfo = {
-    title: 'QR Code',
+    title: 'Radio Matrix',
     group: 'basic',
     icon: 'fa fa-table',
     weight: 70,
-    schema: QrCode.schema()
+    documentation: 'http://help.form.io/userguide/#table',
+    schema: RadioMatrix.schema()
   }
 
+  get tableClass() {
+    let tableClass = 'table ';
+    ['striped', 'bordered', 'hover', 'condensed'].forEach((prop) => {
+      if (this.component[prop]) {
+        tableClass += `table-${prop} `;
+      }
+    });
+    return tableClass;
+  }
 
+  renderCell(row, col) {
+    return this.renderTemplate('input', {
+      input: {
+        type: 'input',
+        ref: `${this.component.key}-${row}`,
+        attr: {
+          id: `${this.component.key}-${row}-${col}`,
+          class: 'form-control',
+          type: 'radio',
+        }
+      }
+    });
+  }
 
   public render(children) {
-    var obj = this.renderTemplate('qrcode', {});
-    return super.render(obj);
+    return super.render(this.renderTemplate('qrcode'));
   }
 
   /**
@@ -58,9 +74,8 @@ export default class QrCode extends (baseComponent as any) {
   attach(element) {
     const refs = {};
 
-    this.loadRefs(element, refs);
 
-    //this.value = "";
+    this.loadRefs(element, refs);
 
     // Allow basic component functionality to attach like field logic and tooltips.
     return super.attach(element);
@@ -72,7 +87,7 @@ export default class QrCode extends (baseComponent as any) {
    * @returns {Array}
    */
   getValue() {
-    return this.value;
+    return "abc";
   }
 
   /**
@@ -82,6 +97,6 @@ export default class QrCode extends (baseComponent as any) {
    * @returns {boolean}
    */
   setValue(value) {
-    this.value = value;
+ 
   }
 }
