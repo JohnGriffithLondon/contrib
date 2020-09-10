@@ -1,9 +1,7 @@
 import checkmatrix from './CheckMatrix/CheckMatrix';
-import radiomatrix from './RadioMatrix/RadioMatrix';
-import qrcode from './QrCode/QrCode';
+import code from './Code/Code';
 
 export default {
   checkmatrix,
-  qrcode,
-  radiomatrix
+  code
 };

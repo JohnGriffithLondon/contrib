@@ -1,9 +1,7 @@
 import checkmatrix from './CheckMatrix/CheckMatrix';
-import radiomatrix from './RadioMatrix/RadioMatrix';
-import qrcode from './QrCode/QrCode';
+import code from './Code/Code';
 declare const _default: {
     checkmatrix: typeof checkmatrix;
-    qrcode: typeof qrcode;
-    radiomatrix: typeof radiomatrix;
+    code: typeof code;
 };
 export default _default;

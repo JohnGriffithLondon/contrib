@@ -2,10 +2,7 @@ declare const _default: {
     checkmatrix: {
         form: string;
     };
-    qrcode: {
-        form: string;
-    };
-    radiomatrix: {
+    code: {
         form: string;
     };
 };

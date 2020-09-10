@@ -5,7 +5,7 @@
  */
 import { Components } from 'formiojs';
 const FieldComponent = (Components as any).components.field;
-import editForm from './RadioMatrix.form';
+import editForm from './Code.form';
 
 /**
  * Here we will derive from the base component which all Form.io form components derive from.
@@ -15,53 +15,31 @@ import editForm from './RadioMatrix.form';
  * @param data
  * @constructor
  */
-export default class RadioMatrix extends (FieldComponent as any) {
+export default class Code extends (FieldComponent as any) {
   constructor(component, options, data) {
     super(component, options, data);
   }
-
+  public value: String;
   static schema() {
     return FieldComponent.schema({
-      type: 'radiomatrix' });
+      type: 'code'
+    });
   }
 
   public static editForm = editForm;
 
   static builderInfo = {
-    title: 'Radio Matrix',
+    title: 'code',
     group: 'basic',
-    icon: 'fa fa-table',
+    icon: 'fa fa-qrcode',
     weight: 70,
     documentation: 'http://help.form.io/userguide/#table',
-    schema: RadioMatrix.schema()
+    schema: Code.schema()
   }
 
-  get tableClass() {
-    let tableClass = 'table ';
-    ['striped', 'bordered', 'hover', 'condensed'].forEach((prop) => {
-      if (this.component[prop]) {
-        tableClass += `table-${prop} `;
-      }
-    });
-    return tableClass;
-  }
-
-  renderCell(row, col) {
-    return this.renderTemplate('input', {
-      input: {
-        type: 'input',
-        ref: `${this.component.key}-${row}`,
-        attr: {
-          id: `${this.component.key}-${row}-${col}`,
-          class: 'form-control',
-          type: 'radio',
-        }
-      }
-    });
-  }
 
   public render(children) {
-    return super.render(this.renderTemplate('qrcode'));
+    return super.render(this.renderTemplate('code'));
   }
 
   /**
@@ -87,7 +65,7 @@ export default class RadioMatrix extends (FieldComponent as any) {
    * @returns {Array}
    */
   getValue() {
-    return "abc";
+    return this.value;
   }
 
   /**
@@ -97,6 +75,7 @@ export default class RadioMatrix extends (FieldComponent as any) {
    * @returns {boolean}
    */
   setValue(value) {
- 
+    this.value = value;
+    return true;
   }
 }
