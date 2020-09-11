@@ -6,7 +6,7 @@
 import { Components } from 'formiojs';
 const FieldComponent = (Components as any).components.field;
 import editForm from './Code.form';
-
+import QRCode from 'qrcode';
 /**
  * Here we will derive from the base component which all Form.io form components derive from.
  *
@@ -19,19 +19,20 @@ export default class Code extends (FieldComponent as any) {
   constructor(component, options, data) {
     super(component, options, data);
   }
-  public value: String;
   static schema() {
     return FieldComponent.schema({
-      type: 'code'
+      type: 'code',
+      value: "",
+      codeType: "QrCode"
     });
   }
 
   public static editForm = editForm;
 
   static builderInfo = {
-    title: 'code',
+    title: 'Code',
     group: 'basic',
-    icon: 'fa fa-qrcode',
+    icon: 'fa fa-code',
     weight: 70,
     documentation: 'http://help.form.io/userguide/#table',
     schema: Code.schema()
@@ -65,7 +66,7 @@ export default class Code extends (FieldComponent as any) {
    * @returns {Array}
    */
   getValue() {
-    return this.value;
+    return this.component.value;
   }
 
   /**
@@ -75,7 +76,28 @@ export default class Code extends (FieldComponent as any) {
    * @returns {boolean}
    */
   setValue(value) {
-    this.value = value;
+    var canvas = this.element.querySelector("canvas");
+    var jsBarcode = require('jsbarcode');
+    if (!this.component.value) {
+      canvas.style.display = "none";
+      return;
+    }
+
+    if (this.component.codeType === "QrCode") {
+      QRCode.toCanvas(canvas, this.component.value, {
+        width: 200
+      }, function (error) {
+        if (error) {
+          console.error(error);
+        } else {
+          console.log('success!');
+        }
+      });
+    } else {
+      jsBarcode(canvas, this.component.value);
+
+    }
+    canvas.style.display = "";
     return true;
   }
 }

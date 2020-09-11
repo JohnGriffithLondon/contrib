@@ -65,6 +65,8 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "formiojs": "^4.11.3"
+    "formiojs": "^4.11.3",
+    "jsbarcode": "^3.11.0",
+    "qrcode": "^1.4.4"
   }
 }

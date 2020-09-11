@@ -10,7 +10,6 @@ declare const Code_base: any;
  */
 export default class Code extends Code_base {
     constructor(component: any, options: any, data: any);
-    value: String;
     static schema(): any;
     static editForm: typeof editForm;
     static builderInfo: {
@@ -35,7 +34,7 @@ export default class Code extends Code_base {
      *
      * @returns {Array}
      */
-    getValue(): String;
+    getValue(): any;
     /**
      * Set the value of the component into the dom elements.
      *
