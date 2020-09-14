@@ -1,14 +1,4 @@
 declare const _default: ({
-    key: string;
-    ignore: boolean;
-    type?: undefined;
-    label?: undefined;
-    input?: undefined;
-    tooltip?: undefined;
-    data?: undefined;
-    defaultValue?: undefined;
-    weight?: undefined;
-} | {
     type: string;
     label: string;
     key: string;
@@ -20,9 +10,19 @@ declare const _default: ({
             value: string;
         }[];
     };
+    weight: number;
     defaultValue: string;
     ignore?: undefined;
+} | {
+    key: string;
+    ignore: boolean;
+    type?: undefined;
+    label?: undefined;
+    input?: undefined;
+    tooltip?: undefined;
+    data?: undefined;
     weight?: undefined;
+    defaultValue?: undefined;
 } | {
     type: string;
     label: string;
@@ -30,8 +30,8 @@ declare const _default: ({
     input: boolean;
     tooltip: string;
     weight: number;
-    ignore?: undefined;
     data?: undefined;
     defaultValue?: undefined;
+    ignore?: undefined;
 })[];
 export default _default;
