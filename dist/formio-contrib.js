@@ -132,42 +132,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 
 /***/ }),
 
-/***/ "./lib/components/CheckMatrix/CheckMatrix.form.js":
-/*!********************************************************!*\
-  !*** ./lib/components/CheckMatrix/CheckMatrix.form.js ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var formiojs_components_classes_nested_NestedComponent_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! formiojs/components/_classes/nested/NestedComponent.form */ \"./node_modules/formiojs/components/_classes/nested/NestedComponent.form.js\");\n/* harmony import */ var formiojs_components_classes_nested_NestedComponent_form__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(formiojs_components_classes_nested_NestedComponent_form__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _editForm_CheckMatrix_edit_display__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editForm/CheckMatrix.edit.display */ \"./lib/components/CheckMatrix/editForm/CheckMatrix.edit.display.js\");\nvar __spreadArrays = (undefined && undefined.__spreadArrays) || function () {\n    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;\n    for (var r = Array(s), k = 0, i = 0; i < il; i++)\n        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)\n            r[k] = a[j];\n    return r;\n};\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function () {\n    var extend = [];\n    for (var _i = 0; _i < arguments.length; _i++) {\n        extend[_i] = arguments[_i];\n    }\n    return formiojs_components_classes_nested_NestedComponent_form__WEBPACK_IMPORTED_MODULE_0___default.a.apply(void 0, __spreadArrays([[\n            {\n                key: 'display',\n                components: _editForm_CheckMatrix_edit_display__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n            }\n        ]], extend));\n});\n\n\n//# sourceURL=webpack://FormioContrib/./lib/components/CheckMatrix/CheckMatrix.form.js?");
-
-/***/ }),
-
-/***/ "./lib/components/CheckMatrix/CheckMatrix.js":
-/*!***************************************************!*\
-  !*** ./lib/components/CheckMatrix/CheckMatrix.js ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var formiojs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! formiojs */ \"formiojs\");\n/* harmony import */ var formiojs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(formiojs__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _CheckMatrix_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CheckMatrix.form */ \"./lib/components/CheckMatrix/CheckMatrix.form.js\");\nvar __extends = (undefined && undefined.__extends) || (function () {\n    var extendStatics = function (d, b) {\n        extendStatics = Object.setPrototypeOf ||\n            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||\n            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };\n        return extendStatics(d, b);\n    };\n    return function (d, b) {\n        extendStatics(d, b);\n        function __() { this.constructor = d; }\n        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());\n    };\n})();\n/**\n * This file shows how to create a custom component.\n *\n * Get the base component class by referencing Formio.Components.components map.\n */\n\nvar FieldComponent = formiojs__WEBPACK_IMPORTED_MODULE_0__[\"Components\"].components.field;\n\n/**\n * Here we will derive from the base component which all Form.io form components derive from.\n *\n * @param component\n * @param options\n * @param data\n * @constructor\n */\nvar CheckMatrix = /** @class */ (function (_super) {\n    __extends(CheckMatrix, _super);\n    function CheckMatrix(component, options, data) {\n        var _this = _super.call(this, component, options, data) || this;\n        _this.checks = [];\n        return _this;\n    }\n    CheckMatrix.schema = function () {\n        return FieldComponent.schema({\n            type: 'checkmatrix',\n            numRows: 3,\n            numCols: 3\n        });\n    };\n    Object.defineProperty(CheckMatrix.prototype, \"tableClass\", {\n        get: function () {\n            var _this = this;\n            var tableClass = 'table ';\n            ['striped', 'bordered', 'hover', 'condensed'].forEach(function (prop) {\n                if (_this.component[prop]) {\n                    tableClass += \"table-\" + prop + \" \";\n                }\n            });\n            return tableClass;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    CheckMatrix.prototype.renderCell = function (row, col) {\n        return this.renderTemplate('input', {\n            input: {\n                type: 'input',\n                ref: this.component.key + \"-\" + row,\n                attr: {\n                    id: this.component.key + \"-\" + row + \"-\" + col,\n                    class: 'form-control',\n                    type: 'checkbox',\n                }\n            }\n        });\n    };\n    CheckMatrix.prototype.render = function (children) {\n        return _super.prototype.render.call(this, this.renderTemplate('checkmatrix', {\n            tableClass: this.tableClass,\n            renderCell: this.renderCell.bind(this)\n        }));\n    };\n    /**\n     * After the html string has been mounted into the dom, the dom element is returned here. Use refs to find specific\n     * elements to attach functionality to.\n     *\n     * @param element\n     * @returns {Promise}\n     */\n    CheckMatrix.prototype.attach = function (element) {\n        var _this = this;\n        var refs = {};\n        for (var i = 0; i < this.component.numRows; i++) {\n            refs[this.component.key + \"-\" + i] = 'multiple';\n        }\n        this.loadRefs(element, refs);\n        this.checks = [];\n        for (var i = 0; i < this.component.numRows; i++) {\n            this.checks[i] = Array.prototype.slice.call(this.refs[this.component.key + \"-\" + i], 0);\n            // Attach click events to each input in the row\n            this.checks[i].forEach(function (input) {\n                _this.addEventListener(input, 'click', function () { return _this.updateValue(); });\n            });\n        }\n        // Allow basic component functionality to attach like field logic and tooltips.\n        return _super.prototype.attach.call(this, element);\n    };\n    /**\n     * Get the value of the component from the dom elements.\n     *\n     * @returns {Array}\n     */\n    CheckMatrix.prototype.getValue = function () {\n        var value = [];\n        for (var rowIndex in this.checks) {\n            var row = this.checks[rowIndex];\n            value[rowIndex] = [];\n            for (var colIndex in row) {\n                var col = row[colIndex];\n                value[rowIndex][colIndex] = !!col.checked;\n            }\n        }\n        return value;\n    };\n    /**\n     * Set the value of the component into the dom elements.\n     *\n     * @param value\n     * @returns {boolean}\n     */\n    CheckMatrix.prototype.setValue = function (value) {\n        if (!value) {\n            return;\n        }\n        for (var rowIndex in this.checks) {\n            var row = this.checks[rowIndex];\n            if (!value[rowIndex]) {\n                break;\n            }\n            for (var colIndex in row) {\n                var col = row[colIndex];\n                if (!value[rowIndex][colIndex]) {\n                    return false;\n                }\n                var checked = value[rowIndex][colIndex] ? 1 : 0;\n                col.value = checked;\n                col.checked = checked;\n            }\n        }\n    };\n    CheckMatrix.editForm = _CheckMatrix_form__WEBPACK_IMPORTED_MODULE_1__[\"default\"];\n    CheckMatrix.builderInfo = {\n        title: 'Check Matrix',\n        group: 'basic',\n        icon: 'fa fa-table',\n        weight: 70,\n        documentation: 'http://help.form.io/userguide/#table',\n        schema: CheckMatrix.schema()\n    };\n    return CheckMatrix;\n}(FieldComponent));\n/* harmony default export */ __webpack_exports__[\"default\"] = (CheckMatrix);\n\n\n//# sourceURL=webpack://FormioContrib/./lib/components/CheckMatrix/CheckMatrix.js?");
-
-/***/ }),
-
-/***/ "./lib/components/CheckMatrix/editForm/CheckMatrix.edit.display.js":
-/*!*************************************************************************!*\
-  !*** ./lib/components/CheckMatrix/editForm/CheckMatrix.edit.display.js ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ([\n    {\n        key: 'labelPosition',\n        ignore: true\n    },\n    {\n        key: 'placeholder',\n        ignore: true\n    },\n    {\n        key: 'description',\n        ignore: true\n    },\n    {\n        key: 'hideLabel',\n        ignore: true\n    },\n    {\n        key: 'autofocus',\n        ignore: true\n    },\n    {\n        key: 'tooltip',\n        ignore: true\n    },\n    {\n        key: 'tabindex',\n        ignore: true\n    },\n    {\n        key: 'disabled',\n        ignore: true\n    },\n    {\n        type: 'number',\n        label: 'Number of Rows',\n        key: 'numRows',\n        input: true,\n        weight: 1,\n        placeholder: 'Number of Rows',\n        tooltip: 'Enter the number or rows that should be displayed by this table.'\n    },\n    {\n        type: 'number',\n        label: 'Number of Columns',\n        key: 'numCols',\n        input: true,\n        weight: 2,\n        placeholder: 'Number of Columns',\n        tooltip: 'Enter the number or columns that should be displayed by this table.'\n    },\n    {\n        type: 'checkbox',\n        label: 'Clone Row Components',\n        key: 'cloneRows',\n        input: true,\n        weight: 3,\n        tooltip: 'Check this if you would like to \"clone\" the first row of components to all additional empty rows of the table.'\n    },\n    {\n        type: 'select',\n        label: 'Cell Alignment',\n        key: 'cellAlignment',\n        input: true,\n        tooltip: 'Horizontal alignment for cells of the table.',\n        dataSrc: 'values',\n        data: {\n            values: [\n                { label: 'Left', value: 'left' },\n                { label: 'Center', value: 'center' },\n                { label: 'Right', value: 'right' }\n            ]\n        },\n        defaultValue: 'left',\n        weight: 3\n    },\n    {\n        type: 'checkbox',\n        label: 'Striped',\n        key: 'striped',\n        tooltip: 'This will stripe the table if checked.',\n        input: true,\n        weight: 701\n    },\n    {\n        type: 'checkbox',\n        label: 'Bordered',\n        key: 'bordered',\n        input: true,\n        tooltip: 'This will border the table if checked.',\n        weight: 702\n    },\n    {\n        type: 'checkbox',\n        label: 'Hover',\n        key: 'hover',\n        input: true,\n        tooltip: 'Highlight a row on hover.',\n        weight: 703\n    },\n    {\n        type: 'checkbox',\n        label: 'Condensed',\n        key: 'condensed',\n        input: true,\n        tooltip: 'Condense the size of the table.',\n        weight: 704\n    },\n]);\n\n\n//# sourceURL=webpack://FormioContrib/./lib/components/CheckMatrix/editForm/CheckMatrix.edit.display.js?");
-
-/***/ }),
-
 /***/ "./lib/components/QrCode/QrCode.form.js":
 /*!**********************************************!*\
   !*** ./lib/components/QrCode/QrCode.form.js ***!
@@ -212,7 +176,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _CheckMatrix_CheckMatrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CheckMatrix/CheckMatrix */ \"./lib/components/CheckMatrix/CheckMatrix.js\");\n/* harmony import */ var _QrCode_QrCode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QrCode/QrCode */ \"./lib/components/QrCode/QrCode.js\");\n/* harmony import */ var _BarCode_BarCode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BarCode/BarCode */ \"./lib/components/BarCode/BarCode.js\");\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    checkmatrix: _CheckMatrix_CheckMatrix__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n    qrcode: _QrCode_QrCode__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n    barcode: _BarCode_BarCode__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n});\n\n\n//# sourceURL=webpack://FormioContrib/./lib/components/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _QrCode_QrCode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./QrCode/QrCode */ \"./lib/components/QrCode/QrCode.js\");\n/* harmony import */ var _BarCode_BarCode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarCode/BarCode */ \"./lib/components/BarCode/BarCode.js\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    qrcode: _QrCode_QrCode__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n    barcode: _BarCode_BarCode__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n});\n\n\n//# sourceURL=webpack://FormioContrib/./lib/components/index.js?");
 
 /***/ }),
 
@@ -225,29 +189,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Che
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ \"./lib/components/index.js\");\n/* harmony import */ var _templates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./templates */ \"./lib/templates/index.js\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    components: _components__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n    templates: _templates__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n});\n\n\n//# sourceURL=webpack://FormioContrib/./lib/index.js?");
-
-/***/ }),
-
-/***/ "./lib/templates/bootstrap/checkmatrix/form.ejs.js":
-/*!*********************************************************!*\
-  !*** ./lib/templates/bootstrap/checkmatrix/form.ejs.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("Object.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default=function(ctx) {\nvar __t, __p = '', __j = Array.prototype.join;\nfunction print() { __p += __j.call(arguments, '') }\n__p += '<table class=\"' +\n((__t = ( ctx.tableClass )) == null ? '' : __t) +\n'\">\\n    <tbody>\\n        ';\n for (let i = 0; i < ctx.component.numRows; i++) { ;\n__p += '\\n            <tr>\\n                ';\n for (let j = 0; j < ctx.component.numCols; j++) { ;\n__p += '\\n                    <td>' +\n((__t = ( ctx.renderCell(i, j) )) == null ? '' : __t) +\n'</td>\\n                ';\n } ;\n__p += '\\n            </tr>\\n        ';\n } ;\n__p += '\\n    </tbody>\\n</table>\\n';\nreturn __p\n}\n\n//# sourceURL=webpack://FormioContrib/./lib/templates/bootstrap/checkmatrix/form.ejs.js?");
-
-/***/ }),
-
-/***/ "./lib/templates/bootstrap/checkmatrix/index.js":
-/*!******************************************************!*\
-  !*** ./lib/templates/bootstrap/checkmatrix/index.js ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _form_ejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form.ejs */ \"./lib/templates/bootstrap/checkmatrix/form.ejs.js\");\n/* harmony import */ var _form_ejs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_form_ejs__WEBPACK_IMPORTED_MODULE_0__);\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({ form: _form_ejs__WEBPACK_IMPORTED_MODULE_0___default.a });\n\n\n//# sourceURL=webpack://FormioContrib/./lib/templates/bootstrap/checkmatrix/index.js?");
 
 /***/ }),
 
@@ -282,7 +223,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _for
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _checkmatrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkmatrix */ \"./lib/templates/bootstrap/checkmatrix/index.js\");\n/* harmony import */ var _code__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./code */ \"./lib/templates/bootstrap/code/index.js\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    checkmatrix: _checkmatrix__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n    code: _code__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n});\n\n\n//# sourceURL=webpack://FormioContrib/./lib/templates/bootstrap/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _code__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./code */ \"./lib/templates/bootstrap/code/index.js\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    code: _code__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n});\n\n\n//# sourceURL=webpack://FormioContrib/./lib/templates/bootstrap/index.js?");
 
 /***/ }),
 

@@ -1,7 +1,4 @@
 declare const _default: {
-    checkmatrix: {
-        form: string;
-    };
     code: {
         form: string;
     };
