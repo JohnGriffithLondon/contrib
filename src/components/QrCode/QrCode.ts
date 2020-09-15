@@ -5,8 +5,8 @@
  */
 import { Components } from 'formiojs';
 const FieldComponent = (Components as any).components.field;
-import editForm from './Code.form';
-import QRCode from 'qrcode';
+import editForm from './QrCode.form';
+import QRCodeLib from 'qrcode';
 /**
  * Here we will derive from the base component which all Form.io form components derive from.
  *
@@ -15,27 +15,26 @@ import QRCode from 'qrcode';
  * @param data
  * @constructor
  */
-export default class Code extends (FieldComponent as any) {
+export default class QrCode extends (FieldComponent as any) {
   constructor(component, options, data) {
     super(component, options, data);
   }
   static schema() {
     return FieldComponent.schema({
-      type: 'code',
-      value: "",
-      codeType: "QrCode"
+      type: 'qrcode',
+      value: ""
     });
   }
 
   public static editForm = editForm;
 
   static builderInfo = {
-    title: 'Code',
+    title: 'QR Code',
     group: 'basic',
     icon: 'fa fa-code',
     weight: 70,
     documentation: 'http://help.form.io/userguide/#table',
-    schema: Code.schema()
+    schema: QrCode.schema()
   }
 
 
@@ -77,26 +76,22 @@ export default class Code extends (FieldComponent as any) {
    */
   setValue(value) {
     var canvas = this.element.querySelector("canvas");
-    var jsBarcode = require('jsbarcode');
     if (!this.component.value) {
       canvas.style.display = "none";
       return;
     }
+    var option = {} as any;
 
-    if (this.component.codeType === "QrCode") {
-      QRCode.toCanvas(canvas, this.component.value, {
-        width: 200
-      }, function (error) {
-        if (error) {
-          console.error(error);
-        } else {
-          console.log('success!');
-        }
-      });
-    } else {
-      jsBarcode(canvas, this.component.value);
-
+    if (this.component.width) {
+      option.width = this.component.width;
     }
+    QRCodeLib.toCanvas(canvas, this.component.value, option, function (error) {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log('success!');
+      }
+    });
     canvas.style.display = "";
     return true;
   }

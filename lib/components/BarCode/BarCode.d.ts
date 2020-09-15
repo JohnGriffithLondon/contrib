@@ -1,5 +1,5 @@
-import editForm from './QrCode.form';
-declare const QrCode_base: any;
+import editForm from './BarCode.form';
+declare const BarCode_base: any;
 /**
  * Here we will derive from the base component which all Form.io form components derive from.
  *
@@ -8,7 +8,7 @@ declare const QrCode_base: any;
  * @param data
  * @constructor
  */
-export default class QrCode extends QrCode_base {
+export default class BarCode extends BarCode_base {
     constructor(component: any, options: any, data: any);
     static schema(): any;
     static editForm: typeof editForm;

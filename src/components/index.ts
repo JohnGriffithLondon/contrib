@@ -1,7 +1,7 @@
-import checkmatrix from './CheckMatrix/CheckMatrix';
-import code from './Code/Code';
+import qrcode from './QrCode/QrCode';
+import barcode from './BarCode/BarCode';
 
 export default {
-  checkmatrix,
-  code
+  qrcode,
+  barcode
 };

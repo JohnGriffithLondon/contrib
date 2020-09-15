@@ -1,18 +1,20 @@
 export default [
   {
-    type: 'select',
-    label: 'Code Type',
-    key: 'codeType',
+    type: 'number',
+    label: 'Size',
+    key: 'width',
     input: true,
-    tooltip: 'Code Type: Bar Code or Qr Code.',
-    data: {
-      values: [
-        { label: 'Qr Code', value: 'QrCode' },
-        { label: 'Bar Code', value: 'BarCode' }
-      ]
-    },
     weight: 1,
-    defaultValue: 'QrCode'
+    placeholder: 'Size of Qr Code',
+    tooltip: 'Enter the size that should be displayed by this Qr Code.'
+  },
+  {
+    type: 'input',
+    label: 'Value',
+    key: 'value',
+    input: true,
+    tooltip: 'Value',
+    weight: 2
   },
   {
     key: 'labelPosition',
@@ -61,13 +63,5 @@ export default [
   {
     key: 'disabled',
     ignore: true
-  },
-  {
-    type: 'input',
-    label: 'Value',
-    key: 'value',
-    input: true,
-    tooltip: 'Value',
-    weight: 2
   }
 ];
